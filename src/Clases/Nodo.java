@@ -1,4 +1,4 @@
- /**                       ** 
+/**                       ** 
  *                         *
  * Autor: Walther Carrasco *
  *                         *
@@ -6,16 +6,28 @@
 
 package Clases;
 
+import java.util.ArrayList;
+
 public class Nodo {
     char letra;
     boolean estaChallenger;
     boolean origen = false;
+    ArrayList <Arista> aristas;
 
-    public Nodo(char letra, boolean estaChallenger) {
+    public Nodo(char letra, boolean estaChallenger, ArrayList<Arista> aristas) {
         this.letra = letra;
         this.estaChallenger = estaChallenger;
+        this.aristas = aristas;
     }
 
+    public ArrayList<Arista> getAristas() {
+        return aristas;
+    }
+
+    public void setAristas(ArrayList<Arista> aristas) {
+        this.aristas = aristas;
+    }
+    
     public char getLetra() {
         return letra;
     }

@@ -22,7 +22,10 @@ public class Inicio extends Thread {
     public void run(){
         for(int i=1;i<=100;i++){
             progreso.setValue(i);
-            pausa(30);
+            if(i<50)
+                pausa(60);
+            else
+                pausa(45);
         }
     }
     
