@@ -1,23 +1,23 @@
-/**                       ** 
+/**
+ * **
  *                         *
- * Autor: Walther Carrasco *
- *                         *
- **                       **/
-
+ * Autor: Walther Carrasco * * *                       *
+ */
 package Clases;
 
 import java.util.ArrayList;
 
 public class Nodo {
-    char letra;
-    boolean estaChallenger;
-    boolean origen = false;
-    ArrayList <Arista> aristas;
 
-    public Nodo(char letra, boolean estaChallenger, ArrayList<Arista> aristas) {
+    String letra;
+    boolean estaChallenger = false;
+    boolean origen = false;
+    ArrayList<Arista> aristas = new ArrayList<>();
+    int contadorOrigenes = 0;
+    int x, y;
+
+    public Nodo(String letra) {
         this.letra = letra;
-        this.estaChallenger = estaChallenger;
-        this.aristas = aristas;
     }
 
     public ArrayList<Arista> getAristas() {
@@ -27,12 +27,12 @@ public class Nodo {
     public void setAristas(ArrayList<Arista> aristas) {
         this.aristas = aristas;
     }
-    
-    public char getLetra() {
+
+    public String getLetra() {
         return letra;
     }
 
-    public void setLetra(char letra) {
+    public void setLetra(String letra) {
         this.letra = letra;
     }
 
@@ -52,10 +52,15 @@ public class Nodo {
         this.origen = origen;
     }
 
+    public void addArista(Nodo destino, int peso) {
+        Arista a = new Arista(this, destino, peso);
+        destino.contadorOrigenes++;
+        aristas.add(a);
+    }
+
     @Override
     public String toString() {
-        return "Nodo{" + "letra=" + letra + ", estaChallenger=" + estaChallenger + ", origen=" + origen + '}';
+        return "Nodo{" + "letra=" + letra + ", estaChallenger=" + estaChallenger + ", origen=" + origen + "}\n";
     }
-    
-    
+
 }

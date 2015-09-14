@@ -8,21 +8,29 @@ package ups.nasa;
 import Clases.*;
 import Hilo.Inicio;
 import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -59,9 +67,15 @@ public class gui extends javax.swing.JFrame {
     private void initComponents() {
 
         PantallaPrincipal = new javax.swing.JDialog();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        GrafoEnTexto = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
+        universo = new javax.swing.JPanel();
+        btON = new javax.swing.JToggleButton();
+        btOFF = new javax.swing.JToggleButton();
+        jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Sobre = new javax.swing.JDialog();
@@ -70,23 +84,68 @@ public class gui extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        PantallaDibujo = new javax.swing.JDialog();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         progreso = new javax.swing.JProgressBar();
 
         PantallaPrincipal.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setText("jLabel3");
-        PantallaPrincipal.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 533, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ups/nasa/challenger.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ups/nasa/challenger2.png"))); // NOI18N
         PantallaPrincipal.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, -1, 140));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ups/nasa/sobre.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ups/nasa/about.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
         });
-        PantallaPrincipal.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 710, -1, -1));
+        PantallaPrincipal.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 730, 200, 60));
+
+        GrafoEnTexto.setColumns(20);
+        GrafoEnTexto.setRows(5);
+        jScrollPane1.setViewportView(GrafoEnTexto);
+
+        PantallaPrincipal.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 380, 270, 260));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ups/nasa/LeerMapa.png"))); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+        PantallaPrincipal.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 630, -1, -1));
+
+        universo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                universoMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout universoLayout = new javax.swing.GroupLayout(universo);
+        universo.setLayout(universoLayout);
+        universoLayout.setHorizontalGroup(
+            universoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+        universoLayout.setVerticalGroup(
+            universoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 680, Short.MAX_VALUE)
+        );
+
+        PantallaPrincipal.getContentPane().add(universo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 680));
+
+        buttonGroup1.add(btON);
+        btON.setText("ON");
+        PantallaPrincipal.getContentPane().add(btON, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 720, -1, -1));
+
+        buttonGroup1.add(btOFF);
+        btOFF.setSelected(true);
+        btOFF.setText("OFF");
+        PantallaPrincipal.getContentPane().add(btOFF, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 720, -1, -1));
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("EDITABLE");
+        PantallaPrincipal.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 690, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ups/nasa/espacio.jpg"))); // NOI18N
         PantallaPrincipal.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, -1));
@@ -152,6 +211,17 @@ public class gui extends javax.swing.JFrame {
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout PantallaDibujoLayout = new javax.swing.GroupLayout(PantallaDibujo.getContentPane());
+        PantallaDibujo.getContentPane().setLayout(PantallaDibujoLayout);
+        PantallaDibujoLayout.setHorizontalGroup(
+            PantallaDibujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        PantallaDibujoLayout.setVerticalGroup(
+            PantallaDibujoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setUndecorated(true);
@@ -178,7 +248,7 @@ public class gui extends javax.swing.JFrame {
                 PantallaPrincipal.setUndecorated(true);
                 PantallaPrincipal.setLocation(0, 0);
                 PantallaPrincipal.setSize(1920, 1080);
-
+                //PantallaPrincipal.setSize(1920/2, 1080/2);
                 /*try {
                  PantallaPrincipal.setContentPane((new JLabel(new ImageIcon(ImageIO.read(new File("espacio.jpg"))))));
                  } catch (IOException ex) {
@@ -213,6 +283,118 @@ public class gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha podido cargar la página");
         }
     }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        String aux = "";
+        String texto = "";
+        try {
+            JFileChooser file = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt");
+            file.setFileFilter(filter);
+            file.showOpenDialog(this);
+            File abre = file.getSelectedFile();
+
+            if (abre != null) {
+                FileReader archivos = new FileReader(abre);
+                BufferedReader lee = new BufferedReader(archivos);
+                while ((aux = lee.readLine()) != null) {
+                    texto += aux + "\n";
+                }
+                lee.close();
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex + ""
+                    + "\nNo se ha encontrado el archivo",
+                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+        }
+        String[] array;
+        array = texto.split(";");
+        JOptionPane.showMessageDialog(this, array[0]);
+        int cantidadNodos = Integer.parseInt(array[0]);
+        for (int k = 0; k < cantidadNodos; k++) {
+            String[] array2 = ((String) array[k + 1]).split(":");
+            Nodo a = new Nodo(array2[0]);
+            grafo.addNodo(a);
+            //Consola.setText(Consola.getText() +"Agregado nodo: "+ a.getLetra());
+            Nodo b = new Nodo(array2[2]);
+            grafo.addNodo(b);
+            System.out.println("Arista de " + a.getLetra() + " hasta " + b.getLetra() + " con peso de " + array2[1]);
+            int puestoOrigen = 0, puestoDestino = 0;
+            for (int l = 0; l < grafo.getNodos().size(); l++) {
+                if (b.getLetra().contentEquals(grafo.getNodos().get(l).getLetra())) {
+                    puestoDestino = l;
+                } else if (a.getLetra().contentEquals(grafo.getNodos().get(l).getLetra())) {
+                    puestoOrigen = l;
+                }
+            }
+
+            grafo.getNodos().get(puestoOrigen).addArista(grafo.getNodos().get(puestoDestino), Integer.parseInt(array2[1]));
+
+        }
+
+        GrafoEnTexto.setText(grafo.toString());
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void universoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_universoMouseClicked
+        Pintar p = new Pintar();
+        if (btON.isSelected()) {
+            if (MaxNodos < 26) {
+                Graphics g = universo.getGraphics();
+
+                p.DibujarCirculo(g, evt.getX(), evt.getY(), abc[MaxNodos]);
+
+                grafo.addNodo(new Nodo(abc[MaxNodos]));
+                
+                
+                
+                for (int k = 0; k < grafo.getCantidadNodos(); k++) {
+                    if (grafo.getNodos().get(k).getLetra().contentEquals(abc[MaxNodos])) {
+                        puntos.add(new Punto(evt.getX(), evt.getY(), grafo.getNodos().get(k)));
+                    }
+                }
+
+                MaxNodos++;
+            } else {
+                JOptionPane.showMessageDialog(null, "HA ALCANZADO LA CANTIDAD MAXIMA DE PLANETAS");
+            }
+
+        } else if (btOFF.isSelected()) {
+            int equis = evt.getX(), ye = evt.getY();
+            cicDerechoSobreNodo(equis, ye);
+        }
+        
+        if (NodosSeleccionados == 2) {
+            NodosSeleccionados = 0;
+            
+        }
+
+    }//GEN-LAST:event_universoMouseClicked
+
+    public void cicDerechoSobreNodo(int xxx, int yyy) {
+        for (int j = 0; j < MaxNodos; j++) {
+            if ((xxx + 2) > puntos.get(j).getX() && xxx < (puntos.get(j).getX() + 13) && (yyy + 2) > puntos.get(j).getY() && yyy < (puntos.get(j).getY() + 13)) {
+                if (NodosSeleccionados == 0) {
+                    Nodo1 = j;
+                    Pintar p = new Pintar();
+                    p.clickSobreNodo(universo.getGraphics(), puntos.get(j).getX(), puntos.get(j).getY(), null, Color.orange);
+                    NodosSeleccionados++;
+                }else{
+                    Nodo2 = j;
+                    Pintar p = new Pintar();
+                    p.clickSobreNodo(universo.getGraphics(), puntos.get(j).getX(), puntos.get(j).getY(), null, Color.orange);
+                    NodosSeleccionados++;
+                    if (Nodo1 == Nodo2) {
+                        NodosSeleccionados = 0;
+                        p.DibujarCirculo(universo.getGraphics(), puntos.get(j).getX(), puntos.get(j).getY(), puntos.get(j).getNodo().getLetra());
+                        Nodo1 = -1;
+                        Nodo2 = -2;
+                    }
+                }
+
+            }
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -253,30 +435,39 @@ public class gui extends javax.swing.JFrame {
                     //g.setUndecorated(false);
                     // JLabel j = new JLabel();
 
+                    //g.setSize(1920, 1080);
                     g.setContentPane((new JLabel(new ImageIcon(ImageIO.read(new File("nasa2.png"))))));
                 } catch (IOException ex) {
                     Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                g.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                //g.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 g.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea GrafoEnTexto;
+    private javax.swing.JDialog PantallaDibujo;
     private javax.swing.JDialog PantallaPrincipal;
     private javax.swing.JDialog Sobre;
+    private javax.swing.JToggleButton btOFF;
+    private javax.swing.JToggleButton btON;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JProgressBar progreso;
+    private javax.swing.JPanel universo;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JProgressBar getProgreso() {
@@ -286,5 +477,9 @@ public class gui extends javax.swing.JFrame {
     public void setProgreso(javax.swing.JProgressBar progreso) {
         this.progreso = progreso;
     }
-
+    Grafo grafo = new Grafo();
+    int MaxNodos = 0;
+    String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+    ArrayList<Punto> puntos = new ArrayList<>();
+    int NodosSeleccionados = 0, Nodo1, Nodo2;
 }
