@@ -50,8 +50,9 @@ public class gui extends javax.swing.JFrame {
     public gui() {
 
         initComponents();
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         iniciar();
+        
 
     }
 
@@ -81,7 +82,6 @@ public class gui extends javax.swing.JFrame {
         btON = new javax.swing.JToggleButton();
         btOFF = new javax.swing.JToggleButton();
         jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         cbOrigen = new javax.swing.JComboBox();
@@ -159,14 +159,6 @@ public class gui extends javax.swing.JFrame {
         jLabel12.setText("EDITABLE");
         PantallaPrincipal.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 690, -1, -1));
 
-        jButton1.setText("GUARDAR");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        PantallaPrincipal.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 870, -1, -1));
-
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ups/nasa/GuardarMapa.png"))); // NOI18N
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -175,13 +167,13 @@ public class gui extends javax.swing.JFrame {
         });
         PantallaPrincipal.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 630, -1, -1));
 
-        jButton2.setText("jButton2");
+        jButton2.setText("RESET");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
-        PantallaPrincipal.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 800, -1, -1));
+        PantallaPrincipal.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 860, -1, -1));
 
         PantallaPrincipal.getContentPane().add(cbOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 460, -1, -1));
 
@@ -471,10 +463,6 @@ public class gui extends javax.swing.JFrame {
 
     }//GEN-LAST:event_universoMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
-    }//GEN-LAST:event_jButton1MouseClicked
-
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         grafo.guardarGrafo();
     }//GEN-LAST:event_jLabel13MouseClicked
@@ -580,12 +568,12 @@ public class gui extends javax.swing.JFrame {
                     //g.setUndecorated(false);
                     // JLabel j = new JLabel();
 
-                    //g.setSize(1920, 1080);
+                    g.setSize(1920, 1080);
                     g.setContentPane((new JLabel(new ImageIcon(ImageIO.read(new File("nasa2.png"))))));
                 } catch (IOException ex) {
                     Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //g.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                g.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 g.setVisible(true);
             }
         });
@@ -602,7 +590,6 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JComboBox cbDestino;
     private javax.swing.JComboBox cbOrigen;
     private javax.swing.JCheckBox cbxWarp;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

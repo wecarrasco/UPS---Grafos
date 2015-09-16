@@ -23,10 +23,10 @@ public class Inicio extends Thread {
             progreso.setValue(i);
             if (i < 50) //pausa(60);
             {
-                pausa(10);
+                pausa(60);
             } else //pausa(45);
             {
-                pausa(10);
+                pausa(45);
             }
         }
     }
